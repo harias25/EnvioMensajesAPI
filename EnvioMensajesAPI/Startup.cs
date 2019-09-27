@@ -18,12 +18,18 @@ namespace EnvioMensajesAPI
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set;  }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            services.Configure<UserAuth>(Configuration.GetSection("BasicAuth"));
+            services.Configure<ConexionString>(Configuration.GetSection("ConnectionString"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +40,13 @@ namespace EnvioMensajesAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            Configuration = builder.Build();
+
+            app.UseMiddleware<BasicAuth>("");
             app.UseMvc();
         }
     }

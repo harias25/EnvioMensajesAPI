@@ -1,0 +1,7 @@
+{
+  "ConnectionString": "Server=server_ip;Database=database_name;Uid=db_user_name;Pwd=db_user_password;SslMode=none",
+  "BasicAuth": {
+    "UserName": "usrAdmMensajeria",
+    "Password": "M3Ns#rM324!!**."
+  }
+}
