@@ -28,7 +28,17 @@ class EnvioMensaje
         public RespuestaEnvio generarEnvio()
         {
 
-        String link = "https://comunicador.tigo.com.gt/api/http/send_to_contact?msisdn=502<NUMERO>&message=<MENSAJE>&api_key=HXc17IU4NTvqnTKIF8rmJddD7IFnAimP&id=<ID>";
+        String link = "";
+        if(empresa.ToUpper() == "MED")
+        {
+            link = "https://comunicador.tigo.com.gt/api/http/send_to_contact?msisdn=502<NUMERO>&message=<MENSAJE>&api_key=tvijdj36ovmf4tkdlveaai93fplfdgrs&id=<ID>";
+        }
+        else if (empresa.ToUpper() == "AME")
+        {
+            link = "https://comunicador.tigo.com.gt/api/http/send_to_contact?msisdn=502<NUMERO>&message=<MENSAJE>&api_key=12FepToLKbPgoZXpw94h7SA9Ji6ugEnI&id=<ID>";
+        }
+
+
         try
         {     
             String id = numero+DateTime.Now.ToString("ddMMyyHHmmss");
